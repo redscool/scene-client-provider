@@ -12,13 +12,13 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2ABDBC427F4B43AD9031AB9F /* KumbhSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */; };
+		62B68AD91669495FA89AD20E /* KumbhSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-ProjectWProvider-ProjectWProviderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ProjectWProvider-ProjectWProviderTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9FDB9DEF161F49C6B9FFBEBB /* KumbhSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */; };
 		C11A65F310474A9486C189A2 /* KumbhSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */; };
-		62B68AD91669495FA89AD20E /* KumbhSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */; };
 		D332A2EE7F8840228DCC5753 /* KumbhSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */; };
-		2ABDBC427F4B43AD9031AB9F /* KumbhSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,16 +44,16 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ProjectWProvider-ProjectWProviderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectWProvider-ProjectWProviderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-ProjectWProvider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider.debug.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider/Pods-ProjectWProvider.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ProjectWProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider.release.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider/Pods-ProjectWProvider.release.xcconfig"; sourceTree = "<group>"; };
+		5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Light.ttf"; path = "../app/assets/fonts/KumbhSans-Light.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider-ProjectWProviderTests/Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ProjectWProvider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectWProvider.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-SemiBold.ttf"; path = "../app/assets/fonts/KumbhSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ProjectWProvider/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider-ProjectWProviderTests/Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig"; sourceTree = "<group>"; };
+		A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Bold.ttf"; path = "../app/assets/fonts/KumbhSans-Bold.ttf"; sourceTree = "<group>"; };
+		CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Medium.ttf"; path = "../app/assets/fonts/KumbhSans-Medium.ttf"; sourceTree = "<group>"; };
+		E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Regular.ttf"; path = "../app/assets/fonts/KumbhSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */ = {isa = PBXFileReference; name = "KumbhSans-Bold.ttf"; path = "../app/assets/fonts/KumbhSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */ = {isa = PBXFileReference; name = "KumbhSans-Light.ttf"; path = "../app/assets/fonts/KumbhSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */ = {isa = PBXFileReference; name = "KumbhSans-Medium.ttf"; path = "../app/assets/fonts/KumbhSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */ = {isa = PBXFileReference; name = "KumbhSans-Regular.ttf"; path = "../app/assets/fonts/KumbhSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "KumbhSans-SemiBold.ttf"; path = "../app/assets/fonts/KumbhSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +148,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A64A000D868C4B1E8B7C89C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */,
+				5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */,
+				CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */,
+				E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */,
+				766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,19 +171,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		A64A000D868C4B1E8B7C89C0 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */,
-				5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */,
-				CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */,
-				E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */,
-				766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -573,7 +573,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -601,6 +601,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -608,7 +609,13 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -645,7 +652,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -665,6 +672,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -672,7 +680,13 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
