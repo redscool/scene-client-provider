@@ -11,7 +11,7 @@ const EventOptions = ({navigation, route}) => {
     {
       id: 1,
       icon: 'ticket',
-      onPress: () => navigate(routes.SCAN_TICKET),
+      onPress: () => navigate(routes.SCAN_TICKET, event),
       value: 'Scan Ticket',
     },
     {
@@ -35,7 +35,7 @@ const EventOptions = ({navigation, route}) => {
     {
       id: 5,
       icon: 'ticket',
-      onPress: () => navigate(routes.SCAN_TICKET),
+      onPress: () => navigate(routes.SCAN_TICKET, event),
       value: 'Need Help?',
     },
   ];
