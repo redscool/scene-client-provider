@@ -1,15 +1,55 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {
+  Camera,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
+} from 'react-native-vision-camera';
 
 function QRScanner({setQrValue, style}) {
+  const device = useCameraDevice('back');
+  const {requestPermission} = useCameraPermission();
+
+  if (device == null)
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{margin: 10}}>Camera Not Found</Text>
+      </View>
+    );
+
+  const codeScanner = useCodeScanner({
+    codeTypes: ['qr'],
+    onCodeScanned: codes => {
+      let value = codes[0]?.value;
+      let type = codes[0]?.type;
+      console.log(codes[0]);
+      setQrValue(value);
+    },
+  });
+
+  const handleCameraPermission = async () => {
+    const granted = await requestPermission();
+    if (!granted) {
+      alert(
+        'Camera permission is required to use the camera. Please grant permission in your device settings.',
+      );
+      Linking.openSettings();
+    }
+  };
+
+  useEffect(() => {
+    handleCameraPermission();
+  }, []);
+
   return (
     <View style={[styles.container, style]}>
-      <QRCodeScanner
-        containerStyle={{justifyContent: 'flex-start'}}
-        cameraContainerStyle={{width: 256, height: 256, marginTop: 70}}
-        cameraStyle={[styles.container]}
-        onRead={e => setQrValue(e.data)}
+      <Camera
+        codeScanner={codeScanner}
+        style={StyleSheet.absoluteFill}
+        device={device}
+        isActive={true}
+        onTouchEnd={() => setEnableOnCodeScanned(true)}
       />
     </View>
   );
@@ -19,9 +59,9 @@ export default QRScanner;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 0,
     borderRadius: 8,
     width: 256,
     height: 256,
+    marginTop: 40,
   },
 });
