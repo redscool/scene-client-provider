@@ -1,14 +1,49 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import fonts from '../config/fonts';
 import NormalText from '../components/NormalText';
 import QRScanner from '../components/QRScanner';
 import TextButton from '../components/TextButton';
 import routes from '../navigation/routes';
+import {showToast} from '../components/widgets/toast';
+import {useService} from '../../context';
 
-const ScanTicket = ({navigation}) => {
+const ScanTicket = ({navigation, route}) => {
+  const {requestWithAccessToken} = useService();
+
   const {navigate} = navigation;
+
+  const eventId = route.params._id;
+
+  const [qrcode, setQrCode] = useState();
+
+  const handleSubmit = async () => {
+    if (!qrcode) return;
+    try {
+      const userId = qrcode.substr(0, 24);
+      const ticketId = qrcode.substr(24, 24);
+
+      console.log(userId);
+      console.log(ticketId);
+      const res = await requestWithAccessToken('post', '/api/app/event/scanTicket/', {
+        eventId,
+        ticketId,
+        userId,
+      });
+      console.log(res);
+    } catch (e) {
+      // TODO: error handling
+      showToast('Invalid Ticket');
+      console.log(e);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    handleSubmit();
+  }, [qrcode]);
+
   return (
     <View style={styles.container}>
       <View style={styles.warningContainer}>
@@ -19,7 +54,7 @@ const ScanTicket = ({navigation}) => {
           title="Need Help?"
         />
       </View>
-      <QRScanner style={styles.qRScanner} />
+      <QRScanner setQrValue={setQrCode} style={styles.qRScanner} />
     </View>
   );
 };
