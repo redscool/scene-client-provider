@@ -6,6 +6,7 @@ import Input from '../components/Input.js';
 import LockImage from '../components/LockImage.js';
 import routes from '../navigation/routes.js';
 import useService from '../../context/ServiceContext.js';
+import {showToast} from '../components/widgets/toast.js';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -14,12 +15,13 @@ const ForgotPassword = ({navigation}) => {
   const {request} = useService();
 
   const handleForgotPassword = async () => {
+    console.log("click");
     const data = await request('post', '/api/auth/organiser/forgotPassword', {
       email,
     });
     if (data?.error) {
       // TODO: error handling
-      console.log('error');
+      showToast('Something went wrong.');
     } else {
       navigate(routes.CONFIRM_EMAIL, {email});
     }

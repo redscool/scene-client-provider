@@ -9,8 +9,7 @@ import {showToast} from './widgets/toast';
 import useService from '../../context/ServiceContext';
 
 const UploadImage = ({limit, open, setOpen, setImage}) => {
-
-  const {requestFileServer, requestWithAccessToken} = useService()
+  const {requestFileServer, requestWithAccessToken} = useService();
 
   const handleAssets = async assets => {
     if (assets) {
@@ -29,7 +28,15 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
             '/api/file/image/',
             {mimetype: type, size: fileSize},
           );
-          await requestFileServer('put', url, formData);
+          // TODO: error handling
+          requestFileServer(
+            url,
+            element,
+            type,
+            () => console.log('Success'),
+            () => showToast('Something went wrong.'),
+          );
+          console.log(key);
           imagesArray.push(key);
         } catch (e) {
           console.log(e);

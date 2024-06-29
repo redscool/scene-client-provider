@@ -1,13 +1,15 @@
 import {StyleSheet, TextInput, View} from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import colors from '../config/colors';
 import Icon from '../Icons';
 import fonts from '../config/fonts';
 import AppButton from './AppButton';
 import {useState} from 'react';
-import axios from 'axios';
+import {useService} from '../../context';
+import {showToast} from './widgets/toast';
 
 export default ({setAddress, setSelected, setVisible}) => {
+  const {requestWithAccessToken} = useService();
   const [searchInput, setSearchInput] = useState('');
   const [iniLat, setIniLat] = useState(22.258);
   const [iniLng, setIniLng] = useState(71.19);
@@ -16,15 +18,17 @@ export default ({setAddress, setSelected, setVisible}) => {
   const handleSearch = async () => {
     let query = searchInput.trim();
     if (!query) return;
-    const googleApiEndpoint =
-      'https://maps.googleapis.com/maps/api/place/textsearch/json';
-    const url = `${googleApiEndpoint}?query=${query}&key=AIzaSyBK5Ye8ueqq3o8HmJ_SBbyZPmTGDkIw3Lg`;
+
     try {
       const temp = [];
-      const {data} = await axios.get(url);
-      console.log(data);
-      const {results} = data;
-      for (let element of results) {
+      const {places} = await requestWithAccessToken(
+        'get',
+        '/api/app/venue/place',
+        {
+          query,
+        },
+      );
+      for (let element of places) {
         temp.push({
           ...element.geometry.location,
           name: element.name,
@@ -37,6 +41,7 @@ export default ({setAddress, setSelected, setVisible}) => {
       setSearchResults(temp);
     } catch (e) {
       // TODO: error handling
+      showToast('Something went wrong.');
       console.log(e);
     }
   };
