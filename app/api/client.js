@@ -92,7 +92,7 @@ export const requestWithAccessToken =
     const config = {
       headers: {
         Authorization: token,
-        "x-citykey": 'delhi',
+        'x-citykey': 'delhi',
       },
     };
 
@@ -125,39 +125,23 @@ export const request = navigation => async (method, route, body) => {
 };
 
 export const requestFileServer =
-  navigation =>
-  async (method, url, body, formData = true, replayed = false) => {
-    const token = await getSecureItem(SECURE_STORAGE_KEY.ACCESS_TOKEN);
-    const config = {
-      headers: {
-        Authorization: token,
-        ...(formData && {'content-type': 'multipart/form-data'}),
-      },
-    };
+  navigation => async (url, file, type, onSuccess, onError) => {
     try {
-      const data = await httpRequest(
-        method,
-        url,
-        body,
-        config,
-      );
-      return data;
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      xhr.open('PUT', url);
+      xhr.setRequestHeader('Content-Type', type);
+      xhr.send(file);
+      xhr.onreadystatechange = async function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            await onSuccess();
+          } else {
+            await onError();
+          }
+        }
+      };
     } catch (err) {
-      if(err?.status !== 401) {
-        throw err;
-      }
-      if (replayed) {
-        navigation.navigate(routes.LOGIN);
-        throw err;
-      }
-      await refreshAccessToken(navigation);
-      const res = await requestFileServer(navigation)(
-        method,
-        url,
-        body,
-        formData,
-        true,
-      );
-      return res;
+      throw {error: true};
     }
   };
