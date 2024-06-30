@@ -1,11 +1,12 @@
 #import "AppDelegate.h"
-
+#import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyC91BwDgkP5lhfjIdP4JlqsynLyH0BymPM"];
   self.moduleName = @"ProjectWProvider";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
