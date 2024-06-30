@@ -10,6 +10,7 @@ export default {
   HOME_ORGANISER: 'Home Organiser',
   HOME_STAFF: 'Home Staff',
   INVITE_STAFF: 'Invite Staff',
+  LANDING_PAGE: 'Landing Page',
   LOGIN: 'Login',
   LOGIN_STAFF: 'Login Staff',
   LOGIN_ORGANISER: 'Login Organiser',
