@@ -136,11 +136,7 @@ const AddVenue = ({navigation}) => {
     };
     // TODO: error handling
     try {
-      const resp = await requestWithAccessToken(
-        'post',
-        '/api/app/venue',
-        data,
-      );
+      const resp = await requestWithAccessToken('post', '/api/app/venue', data);
       showToast('Venue added for approval.');
       navigation.reset({
         index: 0,
@@ -277,7 +273,7 @@ const AddVenue = ({navigation}) => {
       <Subheading subheading="Logo" />
       <View style={styles.logoContainer}>
         {logo ? (
-          <UploadedImageCard image={logo} onPress={() => setLogoFile(null)} />
+          <UploadedImageCard image={logo} onPress={() => setLogo(null)} />
         ) : (
           <UploadImageCard
             onPress={() => {
