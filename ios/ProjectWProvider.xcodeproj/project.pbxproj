@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ProjectWProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ProjectWProviderTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-ProjectWProvider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-ProjectWProvider.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1B70B49FA008388934C580D1 /* Pods_ProjectWProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD67E7285EB3E40A635C0B48 /* Pods_ProjectWProvider.framework */; };
+		1E4AEBE43BCE193CF32B72A5 /* Pods_ProjectWProvider_ProjectWProviderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917AEDE078848E81CBDED0F4 /* Pods_ProjectWProvider_ProjectWProviderTests.framework */; };
 		2ABDBC427F4B43AD9031AB9F /* KumbhSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */; };
 		62B68AD91669495FA89AD20E /* KumbhSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */; };
-		7699B88040F8A987B510C191 /* libPods-ProjectWProvider-ProjectWProviderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ProjectWProvider-ProjectWProviderTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		974980B12C31AACE004C7640 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974980B02C31AACE004C7640 /* AppIcon.xcassets */; };
 		9FDB9DEF161F49C6B9FFBEBB /* KumbhSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */; };
@@ -42,18 +42,18 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ProjectWProvider/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ProjectWProvider/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ProjectWProvider/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ProjectWProvider-ProjectWProviderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectWProvider-ProjectWProviderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-ProjectWProvider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider.debug.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider/Pods-ProjectWProvider.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ProjectWProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider.release.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider/Pods-ProjectWProvider.release.xcconfig"; sourceTree = "<group>"; };
 		5827C6B4D3E54ED6A6F73E3F /* KumbhSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Light.ttf"; path = "../app/assets/fonts/KumbhSans-Light.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider-ProjectWProviderTests/Pods-ProjectWProvider-ProjectWProviderTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-ProjectWProvider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectWProvider.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		766E52051F694237AEB8307C /* KumbhSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-SemiBold.ttf"; path = "../app/assets/fonts/KumbhSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ProjectWProvider/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectWProvider-ProjectWProviderTests/Pods-ProjectWProvider-ProjectWProviderTests.release.xcconfig"; sourceTree = "<group>"; };
+		917AEDE078848E81CBDED0F4 /* Pods_ProjectWProvider_ProjectWProviderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectWProvider_ProjectWProviderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974980B02C31AACE004C7640 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = AppIcon.xcassets; path = AppIcon/AppIcon.xcassets; sourceTree = "<group>"; };
 		974980B32C31B89F004C7640 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		A365B072DFC74B30B4C597C5 /* KumbhSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Bold.ttf"; path = "../app/assets/fonts/KumbhSans-Bold.ttf"; sourceTree = "<group>"; };
+		BD67E7285EB3E40A635C0B48 /* Pods_ProjectWProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectWProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD085CC10EA144D6B0E6F051 /* KumbhSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Medium.ttf"; path = "../app/assets/fonts/KumbhSans-Medium.ttf"; sourceTree = "<group>"; };
 		E9E950E814F743AEA94CC3C4 /* KumbhSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-Regular.ttf"; path = "../app/assets/fonts/KumbhSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-ProjectWProvider-ProjectWProviderTests.a in Frameworks */,
+				1E4AEBE43BCE193CF32B72A5 /* Pods_ProjectWProvider_ProjectWProviderTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-ProjectWProvider.a in Frameworks */,
+				1B70B49FA008388934C580D1 /* Pods_ProjectWProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-ProjectWProvider.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-ProjectWProvider-ProjectWProviderTests.a */,
+				BD67E7285EB3E40A635C0B48 /* Pods_ProjectWProvider.framework */,
+				917AEDE078848E81CBDED0F4 /* Pods_ProjectWProvider_ProjectWProviderTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -608,6 +608,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
@@ -628,7 +639,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -677,6 +691,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
@@ -696,7 +721,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
