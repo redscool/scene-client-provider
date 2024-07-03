@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 
 import AppButton from '../components/AppButton';
 import DateTimeInput from '../components/DateTimeInput';
-import Dropdown from '../components/DropDown';
 import fonts from '../config/fonts';
 import Input from '../components/Input';
 import NormalText from '../components/NormalText';
@@ -15,14 +14,15 @@ import UploadImageCard from '../components/UploadImageCard';
 import {showToast} from '../components/widgets/toast';
 import Icon from '../Icons';
 import KeywordListItem from '../components/KeywordListItem';
-import {useConfig, useService} from '../../context';
 import routes from '../navigation/routes';
+import useService from '../../context/service';
+import useAppConfig from '../../context/appConfig';
 
 const EditEvent = ({navigation, route}) => {
   const event = route.params;
 
   const {requestWithAccessToken} = useService();
-  const {cities, eventTags} = useConfig();
+  const {cities, eventTags} = useAppConfig();
 
   const [bannerImage, setBannerImage] = useState();
   const [name, setName] = useState('');

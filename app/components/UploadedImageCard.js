@@ -3,7 +3,7 @@ import React from 'react';
 
 import colors from '../config/colors';
 import Icon from '../Icons';
-import { getFileUrl } from '../utils/misc';
+import {getFileUrl} from '../utils/misc';
 
 const UploadedImageCard = ({image, onPress, style}) => {
   return (
@@ -16,10 +16,9 @@ const UploadedImageCard = ({image, onPress, style}) => {
       <Image
         resizeMode="contain"
         source={{
-          height: image.height,
-          uri: getFileUrl(image),
-          width: image.width,
+          uri: getFileUrl(`${image}`),
         }}
+        loadingIndicatorSource={require('../assets/animations/loading.gif')}
         style={styles.image}
       />
     </View>

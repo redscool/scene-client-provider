@@ -26,7 +26,7 @@ import UploadedImageCard from '../components/UploadedImageCard';
 import UploadImage from '../components/UploadImage';
 import UploadImageCard from '../components/UploadImageCard';
 
-import {useConfig, useService} from '../../context';
+import useService from '../../context/service';
 
 const AddVenue = ({navigation}) => {
   const {requestWithAccessToken} = useService();

@@ -1,19 +1,23 @@
 import {Modal, Pressable, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import AppButton from './AppButton';
 import colors from '../config/colors';
 import {showToast} from './widgets/toast';
 
-import useService from '../../context/ServiceContext';
+import useService from '../../context/service';
 import useCamera from '../hooks/useCamera';
+import ButtonLoader from './ButtonLoader';
 
 const UploadImage = ({limit, open, setOpen, setImage}) => {
   const {requestFileServer, requestWithAccessToken} = useService();
   const cameraGranted = useCamera();
 
+  const [loading, setLoading] = useState();
+
   const handleAssets = async assets => {
+    setLoading(true);
     if (assets) {
       const imagesArray = [];
       for (let element of assets) {
@@ -31,7 +35,7 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
             {mimetype: type, size: fileSize},
           );
           // TODO: error handling
-          requestFileServer(
+          await requestFileServer(
             url,
             element,
             type,
@@ -49,6 +53,8 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
       if (limit > 1) setImage(imagesArray);
       else setImage(imagesArray[0]);
     }
+    setLoading(false);
+    setOpen(false);
   };
 
   const handleCamera = async () => {
@@ -58,7 +64,7 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
       },
       quality: 0.2,
     };
-    launchCamera(options, async response => {
+    await launchCamera(options, async response => {
       const {assets} = response;
       await handleAssets(assets);
     });
@@ -72,7 +78,7 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
       },
       selectionLimit: limit,
     };
-    launchImageLibrary(options, async response => {
+    await launchImageLibrary(options, async response => {
       const {assets} = response;
       await handleAssets(assets);
     });
@@ -83,23 +89,17 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
       onRequestClose={() => setOpen(false)}
       transparent
       visible={open}>
-      <Pressable onPress={() => setOpen(false)} style={styles.overlay} />
-      <View style={styles.modal}>
-        <AppButton
-          onPress={() => {
-            handleCamera();
-            setOpen(false);
-          }}
-          title={'Camera'}
-        />
-        <AppButton
-          onPress={() => {
-            setOpen(false);
-            handleGallery();
-          }}
-          title={'Gallery'}
-        />
-      </View>
+      {loading ? (
+        <ButtonLoader style={styles.loader} />
+      ) : (
+        <>
+          <Pressable onPress={() => setOpen(false)} style={styles.overlay} />
+          <View style={styles.modal}>
+            <AppButton active onPress={handleCamera} title={'Camera'} />
+            <AppButton active onPress={handleGallery} title={'Gallery'} />
+          </View>
+        </>
+      )}
     </Modal>
   );
 };
@@ -107,6 +107,10 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
 export default UploadImage;
 
 const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    margin: 'auto',
+  },
   modal: {
     alignItems: 'center',
     backgroundColor: colors.dark,

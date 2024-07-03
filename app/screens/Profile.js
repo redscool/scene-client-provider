@@ -5,7 +5,7 @@ import ListItem from '../components/ListItem';
 import routes from '../navigation/routes';
 import {getSecureItem, removeSecureItem} from '../utils/storage';
 import {SECURE_STORAGE_KEY, STORAGE_KEY} from '../config/constants';
-import {ServiceContext} from '../../context/ServiceContext';
+import {ServiceContext} from '../../context/service';
 
 const Profile = ({navigation}) => {
   const serviceObject = useContext(ServiceContext);

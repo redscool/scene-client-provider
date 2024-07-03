@@ -1,9 +1,15 @@
 import React from 'react';
-import { useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-import AppNavigator from './AppNavigator';
-import { ServiceContext } from '../../context/ServiceContext';
-import { request, requestFileServer, requestWithAccessToken } from '../api/client';
+import {ServiceContext} from '../../context/service';
+
+import {
+  request,
+  requestFileServer,
+  requestWithAccessToken,
+} from '../api/client';
+
+import ContextProvidersWrapper from './ContextProvidersWrapper';
 
 const getServiceObject = navigation => {
   return {
@@ -13,13 +19,13 @@ const getServiceObject = navigation => {
   };
 };
 
-function NavigationWrapper() {
+function ServiceContextProviderWrapper() {
   const navigation = useNavigation();
   return (
     <ServiceContext.Provider value={getServiceObject(navigation)}>
-      <AppNavigator />
+      <ContextProvidersWrapper />
     </ServiceContext.Provider>
   );
 }
 
-export default NavigationWrapper;
+export default ServiceContextProviderWrapper;

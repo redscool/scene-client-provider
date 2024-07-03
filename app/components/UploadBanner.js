@@ -12,7 +12,7 @@ const UploadBanner = ({image, onPress, style, text}) => {
         <Image
           resizeMode="contain"
           source={{
-            uri: getFileUrl(image),
+            uri: getFileUrl(`${image}`),
           }}
           style={styles.image}
         />
