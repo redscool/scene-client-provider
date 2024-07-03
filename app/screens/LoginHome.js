@@ -1,27 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import fonts from '../config/fonts';
 import ListItem from '../components/ListItem';
 import Logo from '../components/Logo';
 import routes from '../navigation/routes';
-import {getSecureItem} from '../utils/storage';
-import {SECURE_STORAGE_KEY} from '../config/constants';
 
 const LoginHome = ({navigation}) => {
   const {navigate} = navigation;
-  const initApp = async () => {
-    const accessToken = await getSecureItem(SECURE_STORAGE_KEY.ACCESS_TOKEN);
-    if (accessToken) {
-      navigation.reset({
-        index: 0,
-        routes: [{name: routes.HOME_ORGANISER}],
-      });
-    }
-  };
-  useEffect(() => {
-    initApp();
-  }, []);
+
   return (
     <View style={styles.container}>
       <Logo style={styles.logo} />

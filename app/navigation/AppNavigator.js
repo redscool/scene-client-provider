@@ -23,6 +23,7 @@ import {ConfigContext} from '../../context/ConfigContext';
 import EditVenue from '../screens/EditVenue';
 import EditEvent from '../screens/EditEvent';
 import Event from '../screens/Event';
+import LandingPage from '../screens/LandingPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -102,7 +103,12 @@ export default AppNavigator = () => {
         cities,
         types,
       )}>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{animation: 'fade_from_bottom'}}>
+        <Stack.Screen
+          component={LandingPage}
+          name={routes.LANDING_PAGE}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           component={LoginHome}
           name={routes.LOGIN}

@@ -7,9 +7,11 @@ import colors from '../config/colors';
 import {showToast} from './widgets/toast';
 
 import useService from '../../context/ServiceContext';
+import useCamera from '../hooks/useCamera';
 
 const UploadImage = ({limit, open, setOpen, setImage}) => {
   const {requestFileServer, requestWithAccessToken} = useService();
+  const cameraGranted = useCamera();
 
   const handleAssets = async assets => {
     if (assets) {
@@ -54,6 +56,7 @@ const UploadImage = ({limit, open, setOpen, setImage}) => {
       storageOptions: {
         path: 'image',
       },
+      quality: 0.2,
     };
     launchCamera(options, async response => {
       const {assets} = response;
