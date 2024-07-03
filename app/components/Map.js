@@ -5,7 +5,7 @@ import Icon from '../Icons';
 import fonts from '../config/fonts';
 import AppButton from './AppButton';
 import {useState} from 'react';
-import {useService} from '../../context';
+import useService from '../../context/service';
 import {showToast} from './widgets/toast';
 
 export default ({setAddress, setSelected, setVisible}) => {

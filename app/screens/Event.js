@@ -8,12 +8,10 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
-import AppButton from '../components/AppButton';
 import Carousel from '../components/Carousel';
 import colors from '../config/colors';
 import DetailItem from '../components/DetailItem';
 import EventBanner from '../components/EventBanner';
-import FavouriteButton from '../components/FavouriteButton';
 import {
   convertTimeToHHMMFormat,
   getAddress,
@@ -25,9 +23,8 @@ import Heading from '../components/Heading';
 import TextButton from '../components/TextButton';
 import NormalText from '../components/NormalText';
 import Subheading from '../components/Subheading';
-import routes from '../navigation/routes';
-import {useService} from '../../context';
 import fonts from '../config/fonts';
+import useService from '../../context/service';
 
 const Event = ({route, navigation}) => {
   const {navigate} = navigation;

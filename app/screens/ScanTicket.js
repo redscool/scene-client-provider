@@ -7,7 +7,7 @@ import QRScanner from '../components/QRScanner';
 import TextButton from '../components/TextButton';
 import routes from '../navigation/routes';
 import {showToast} from '../components/widgets/toast';
-import {useService} from '../../context';
+import useService from '../../context/service';
 
 const ScanTicket = ({navigation, route}) => {
   const {requestWithAccessToken} = useService();
@@ -26,11 +26,15 @@ const ScanTicket = ({navigation, route}) => {
 
       console.log(userId);
       console.log(ticketId);
-      const res = await requestWithAccessToken('post', '/api/app/event/scanTicket/', {
-        eventId,
-        ticketId,
-        userId,
-      });
+      const res = await requestWithAccessToken(
+        'post',
+        '/api/app/event/scanTicket/',
+        {
+          eventId,
+          ticketId,
+          userId,
+        },
+      );
       console.log(res);
     } catch (e) {
       // TODO: error handling

@@ -16,12 +16,12 @@ import UploadBanner from '../components/UploadBanner';
 import UploadedImageCard from '../components/UploadedImageCard';
 import UploadImage from '../components/UploadImage';
 import UploadImageCard from '../components/UploadImageCard';
-
-import {useConfig, useService} from '../../context';
+import useService from '../../context/service';
+import useAppConfig from '../../context/appConfig';
 
 const EditVenue = ({navigation}) => {
   const {request, requestWithAccessToken} = useService();
-  const {cities, types, venueTags} = useConfig();
+  const {cities, types, venueTags} = useAppConfig();
 
   const [bannerImage, setBannerImage] = useState();
   const [name, setName] = useState('');
@@ -130,14 +130,7 @@ const EditVenue = ({navigation}) => {
   };
 
   const handleSubmit = async () => {
-    if (
-      !bannerImage ||
-      !name ||
-      !abbreviation ||
-      !type ||
-      !gallery ||
-      !logo
-    ) {
+    if (!bannerImage || !name || !abbreviation || !type || !gallery || !logo) {
       showToast('Please Enter All the Details.');
       return;
     }
@@ -157,7 +150,11 @@ const EditVenue = ({navigation}) => {
     };
     // TODO: error handling
     try {
-      const resp = await requestWithAccessToken('patch', '/api/app/venue', data);
+      const resp = await requestWithAccessToken(
+        'patch',
+        '/api/app/venue',
+        data,
+      );
       showToast('Venue added for approval.');
       navigation.reset({
         index: 0,

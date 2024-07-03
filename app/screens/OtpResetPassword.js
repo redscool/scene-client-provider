@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
@@ -8,26 +8,24 @@ import OTPInput from '../components/OtpInput';
 import routes from '../navigation/routes';
 import TextButton from '../components/TextButton';
 import Timer from '../components/Timer';
-import { useService } from '../../context';
+import useService from '../../context/service';
 
 const OtpResetPassword = ({navigation, route}) => {
   const {navigate} = navigation;
   const [otp, setOtp] = useState('');
-  
-  const {request} = useService()
+
+  const {request} = useService();
 
   const handleContinue = async () => {
     const email = route.params.email;
-    const data = await request(
-      'post',
-      '/api/auth/organiser/verifyOtp',
-      {otp, email},
-    );
+    const data = await request('post', '/api/auth/organiser/verifyOtp', {
+      otp,
+      email,
+    });
     if (data?.error) {
       // TODO: error handling
       console.log(data);
-    }
-    else {
+    } else {
       const {resetToken} = data;
       navigate(routes.RESET_PASSWORD, {resetToken});
     }

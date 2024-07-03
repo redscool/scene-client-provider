@@ -8,36 +8,33 @@ import {SECURE_STORAGE_KEY, STORAGE_KEY} from '../config/constants.js';
 import {setSecureItem} from '../utils/storage.js';
 import {showToast} from '../components/widgets/toast.js';
 import TextButton from '../components/TextButton.js';
-import useService from '../../context/ServiceContext.js';
+import useService from '../../context/service.js';
 import VerifyImage from '../components/VerifyImage.js';
+import useAuth from '../../context/auth.js';
 
 const Login = ({navigation}) => {
   const {navigate} = navigation;
+
+  const {login} = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {request} = useService();
+  const [loading, setLoading] = useState();
 
   const handleLogin = async () => {
-    const data = await request('post', '/api/auth/organiser/login', {
-      email,
-      password,
-    });
-    if (data?.error) {
+    setLoading(true);
+    const res = await login(email, password);
+    if (!res) {
       // TODO: HandleError
-      console.log(data);
       showToast('Invalid Credentials!');
     } else {
-      const {accessToken, refreshToken, userId} = data;
-      setSecureItem(SECURE_STORAGE_KEY.ACCESS_TOKEN, accessToken);
-      setSecureItem(SECURE_STORAGE_KEY.REFRESH_TOKEN, refreshToken);
-      setSecureItem(STORAGE_KEY.USER_ID, userId);
-      setSecureItem(STORAGE_KEY.EMAIL, email);
       navigation.reset({
         index: 0,
         routes: [{name: routes.HOME_ORGANISER}],
       });
     }
+    setLoading(false);
   };
   return (
     <View style={styles.container}>
@@ -58,6 +55,7 @@ const Login = ({navigation}) => {
         style={[styles.input, {marginTop: 36}]}
       />
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonText}
         onPress={handleLogin}
         solid

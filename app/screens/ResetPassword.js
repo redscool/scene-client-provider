@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton.js';
 import Input from '../components/Input.js';
 import LockImage from '../components/LockImage.js';
 import routes from '../navigation/routes.js';
-import useService from '../../context/ServiceContext.js';
+import useService from '../../context/service.js';
 import {showToast} from '../components/widgets/toast.js';
 
 const ResetPassword = ({navigation, route}) => {

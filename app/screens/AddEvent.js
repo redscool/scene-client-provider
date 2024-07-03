@@ -15,12 +15,13 @@ import UploadImageCard from '../components/UploadImageCard';
 import {showToast} from '../components/widgets/toast';
 import Icon from '../Icons';
 import KeywordListItem from '../components/KeywordListItem';
-import {useConfig, useService} from '../../context';
 import routes from '../navigation/routes';
+import useService from '../../context/service';
+import useAppConfig from '../../context/appConfig';
 
 const AddEvent = ({navigation}) => {
   const {requestWithAccessToken} = useService();
-  const {cities, eventTags} = useConfig();
+  const {cities, eventTags} = useAppConfig();
 
   const [bannerImage, setBannerImage] = useState();
   const [name, setName] = useState('');
@@ -39,6 +40,8 @@ const AddEvent = ({navigation}) => {
   const [keywords, setKeywords] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [logo, setLogo] = useState();
+
+  const [loading, setLoading] = useState();
 
   const addKeywordHandler = () => {
     if (!keywordInput) {
@@ -132,12 +135,14 @@ const AddEvent = ({navigation}) => {
   }, [city, searchQuery]);
 
   useEffect(() => {
-    const temp = [{id: 1}, ...gallery];
-    if (temp.length % 3 === 2) temp.push({id: temp.length, type: 'space'});
+    const temp = [{id: 1}];
+    for (const pic of gallery) temp.push({id: temp.length + 1, pic});
+    if (temp.length % 3 === 2) temp.push({id: temp.length + 1, type: 'space'});
     setGalleryTilesArray(temp);
   }, [gallery]);
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (
       !name ||
       !venue ||
@@ -149,6 +154,7 @@ const AddEvent = ({navigation}) => {
       !bannerImage ||
       !gallery
     ) {
+      setLoading(false);
       showToast('Please Enter All the Details.');
       return;
     }
@@ -180,6 +186,7 @@ const AddEvent = ({navigation}) => {
     } catch (e) {
       showToast('Something went wrong.');
     }
+    setLoading(false);
   };
 
   return (
@@ -279,6 +286,7 @@ const AddEvent = ({navigation}) => {
         numColumns={3}
         renderItem={({item, index}) => (
           <AppButton
+            active
             fontStyle={{
               fontSize: 10,
               fontFamily: filtersArray[index] ? fonts[600] : fonts[300],
@@ -364,7 +372,7 @@ const AddEvent = ({navigation}) => {
             ) : (
               <UploadedImageCard
                 onPress={() => deleteImage(index - 1)}
-                image={item}
+                image={item.pic}
               />
             )
           }
@@ -387,6 +395,7 @@ const AddEvent = ({navigation}) => {
         )}
       </View>
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonText}
         onPress={handleSubmit}
         solid
