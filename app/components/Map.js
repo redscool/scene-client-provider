@@ -10,14 +10,19 @@ import {showToast} from './widgets/toast';
 
 export default ({setAddress, setSelected, setVisible}) => {
   const {requestWithAccessToken} = useService();
+
   const [searchInput, setSearchInput] = useState('');
   const [iniLat, setIniLat] = useState(22.258);
   const [iniLng, setIniLng] = useState(71.19);
   const [iniZoom, setIniZoom] = useState(100);
   const [searchResults, setSearchResults] = useState([]);
+
+  const [loading, setLoading] = useState();
+
   const handleSearch = async () => {
     let query = searchInput.trim();
     if (!query) return;
+    setLoading(true);
 
     try {
       const temp = [];
@@ -44,6 +49,7 @@ export default ({setAddress, setSelected, setVisible}) => {
       showToast('Something went wrong.');
       console.log(e);
     }
+    setLoading(false);
   };
   return (
     <View style={styles.container}>
@@ -89,6 +95,7 @@ export default ({setAddress, setSelected, setVisible}) => {
           />
         </View>
         <AppButton
+          active={!loading}
           fontStyle={styles.buttonText}
           onPress={handleSearch}
           solid

@@ -18,6 +18,7 @@ import UploadImage from '../components/UploadImage';
 import UploadImageCard from '../components/UploadImageCard';
 import useService from '../../context/service';
 import useAppConfig from '../../context/appConfig';
+import ButtonLoader from '../components/ButtonLoader';
 
 const EditVenue = ({navigation}) => {
   const {request, requestWithAccessToken} = useService();
@@ -33,7 +34,11 @@ const EditVenue = ({navigation}) => {
   const [filtersArray, setFiltersArray] = useState(
     new Array(venueTags.length).fill(false),
   );
+
   const [keywords, setKeywords] = useState([]);
+
+  const [loading, setLoading] = useState();
+  const [venueLoading, setVenueLoading] = useState();
 
   const setImagesArrayHandler = array => {
     const temp = [...gallery, ...array];
@@ -75,7 +80,6 @@ const EditVenue = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState();
   const [venue, setVenue] = useState();
   const [venues, setVenues] = useState([]);
-  const [originalVenue, setOriginalVenue] = useState();
 
   const uploadTypes = {
     BannerImage: {
@@ -110,10 +114,10 @@ const EditVenue = ({navigation}) => {
 
   const getVenue = async () => {
     if (!venue) return;
+    setVenueLoading(true);
     const res = await request('get', '/api/app/venue', {
       venueId: venue.id,
     });
-    setOriginalVenue(res);
     setBannerImage(res.bannerImage);
     setName(res.name);
     setAbbreviation(res.abbreviation);
@@ -127,6 +131,7 @@ const EditVenue = ({navigation}) => {
       for (let i = 0; i < tTags.length; i++)
         if (tag === tTags[i].code) temp[i] = true;
     setFiltersArray(temp);
+    setVenueLoading(false);
   };
 
   const handleSubmit = async () => {
@@ -134,6 +139,7 @@ const EditVenue = ({navigation}) => {
       showToast('Please Enter All the Details.');
       return;
     }
+    setLoading(true);
     const tags = [];
     for (let i = 0; i < filtersArray.length; i++)
       if (filtersArray[i]) tags.push(Object.values(venueTags)[i].code);
@@ -163,6 +169,7 @@ const EditVenue = ({navigation}) => {
     } catch (e) {
       showToast('Something went wrong.');
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -180,183 +187,200 @@ const EditVenue = ({navigation}) => {
   }, [venue]);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      {open && (
-        <UploadImage
-          limit={uploadTypes[uploadType].limit}
-          open={open}
-          setImage={uploadTypes[uploadType].setImage}
-          setOpen={setOpen}
-        />
-      )}
-      <Dropdown
-        data={Object.values(cities)}
-        label="City"
-        onSelect={setCity}
-        placeholder={'Placeholder'}
-        style={{marginTop: 16}}
-      />
-      <Input
-        label="Venue"
-        placeholder="Search venue"
-        setState={setSearchQuery}
-        state={searchQuery}
-        style={{marginTop: 16}}
-      />
-      <Dropdown data={venues} onSelect={setVenue} placeholder={'Placeholder'} />
-      <UploadBanner
-        onPress={() => {
-          setOpen(true);
-          setUploadType('BannerImage');
-        }}
-        text="Banner Image"
-        image={bannerImage}
-        style={styles.uploadBanner}
-      />
-      <Input
-        label="Name"
-        placeholder="Placeholder"
-        setState={setName}
-        state={name}
-        style={{marginTop: 30}}
-      />
-      <Input
-        label="Abbreviation"
-        placeholder="Placeholder"
-        setState={setAbbreviation}
-        state={abbreviation}
-        style={{marginTop: 16}}
-      />
-      <Dropdown
-        data={Object.values(types)}
-        initialSelected={type}
-        label="Type"
-        onSelect={setType}
-        placeholder={'Placeholder'}
-        style={{marginTop: 16}}
-      />
-      <Subheading subheading="Gallery" />
-      <NormalText
-        style={styles.normalText}
-        text="Add photos to be visible on image gallery"
-      />
-      <ScrollView
-        alwaysBounceVertical={false}
-        directionalLockEnabled={true}
-        contentContainerStyle={{
-          width: '100%',
-          padding: 10,
-        }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.imagesList}>
-        <FlatList
-          columnWrapperStyle={{justifyContent: 'space-between'}}
-          contentContainerStyle={{
-            width: '100%',
-          }}
-          data={galleryTilesArray}
-          ItemSeparatorComponent={<View style={{height: 20}} />}
-          keyExtractor={item => item}
-          numColumns={3}
-          renderItem={({item, index}) =>
-            index === 0 ? (
+    <>
+      {venueLoading ? (
+        <ButtonLoader style={styles.loader} />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.container}>
+          {open && (
+            <UploadImage
+              limit={uploadTypes[uploadType].limit}
+              open={open}
+              setImage={uploadTypes[uploadType].setImage}
+              setOpen={setOpen}
+            />
+          )}
+          <Dropdown
+            data={Object.values(cities)}
+            label="City"
+            onSelect={setCity}
+            placeholder={'Placeholder'}
+            style={{marginTop: 16}}
+          />
+          <Input
+            label="Venue"
+            placeholder="Search venue"
+            setState={setSearchQuery}
+            state={searchQuery}
+            style={{marginTop: 16}}
+          />
+          <Dropdown
+            data={venues}
+            onSelect={setVenue}
+            placeholder={'Placeholder'}
+          />
+          <UploadBanner
+            onPress={() => {
+              setOpen(true);
+              setUploadType('BannerImage');
+            }}
+            text="Banner Image"
+            image={bannerImage}
+            style={styles.uploadBanner}
+          />
+          <Input
+            label="Name"
+            placeholder="Placeholder"
+            setState={setName}
+            state={name}
+            style={{marginTop: 30}}
+          />
+          <Input
+            label="Abbreviation"
+            placeholder="Placeholder"
+            setState={setAbbreviation}
+            state={abbreviation}
+            style={{marginTop: 16}}
+          />
+          <Dropdown
+            data={Object.values(types)}
+            initialSelected={type}
+            label="Type"
+            onSelect={setType}
+            placeholder={'Placeholder'}
+            style={{marginTop: 16}}
+          />
+          <Subheading subheading="Gallery" />
+          <NormalText
+            style={styles.normalText}
+            text="Add photos to be visible on image gallery"
+          />
+          <ScrollView
+            alwaysBounceVertical={false}
+            directionalLockEnabled={true}
+            contentContainerStyle={{
+              width: '100%',
+              padding: 10,
+            }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.imagesList}>
+            <FlatList
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              contentContainerStyle={{
+                width: '100%',
+              }}
+              data={galleryTilesArray}
+              ItemSeparatorComponent={<View style={{height: 20}} />}
+              keyExtractor={item => item}
+              numColumns={3}
+              renderItem={({item, index}) =>
+                index === 0 ? (
+                  <UploadImageCard
+                    onPress={() => {
+                      setOpen(true);
+                      setUploadType('Images');
+                    }}
+                  />
+                ) : item.type === 'space' ? (
+                  <View style={{height: 64, width: 64}} />
+                ) : (
+                  <UploadedImageCard
+                    onPress={() => deleteImage(index - 1)}
+                    image={item}
+                  />
+                )
+              }
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              style={{width: '100%'}}
+            />
+          </ScrollView>
+          <Subheading subheading="Logo" />
+          <View style={styles.logoContainer}>
+            {logo ? (
+              <UploadedImageCard
+                image={logo}
+                onPress={() => setLogoFile(null)}
+              />
+            ) : (
               <UploadImageCard
                 onPress={() => {
                   setOpen(true);
-                  setUploadType('Images');
+                  setUploadType('LogoImage');
                 }}
               />
-            ) : item.type === 'space' ? (
-              <View style={{height: 64, width: 64}} />
-            ) : (
-              <UploadedImageCard
-                onPress={() => deleteImage(index - 1)}
-                image={item}
+            )}
+          </View>
+          <Subheading subheading="Add Tags" />
+          <FlatList
+            data={Object.values(venueTags)}
+            keyExtractor={item => item}
+            numColumns={3}
+            renderItem={({item, index}) => (
+              <AppButton
+                active
+                fontStyle={{
+                  fontSize: 10,
+                  fontFamily: filtersArray[index] ? fonts[600] : fonts[300],
+                }}
+                onPress={() => tagClickHandler(index)}
+                solid={filtersArray[index]}
+                style={{margin: 8, height: 28, width: 94}}
+                title={item.title}
               />
-            )
-          }
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          style={{width: '100%'}}
-        />
-      </ScrollView>
-      <Subheading subheading="Logo" />
-      <View style={styles.logoContainer}>
-        {logo ? (
-          <UploadedImageCard image={logo} onPress={() => setLogoFile(null)} />
-        ) : (
-          <UploadImageCard
-            onPress={() => {
-              setOpen(true);
-              setUploadType('LogoImage');
-            }}
+            )}
+            scrollEnabled={false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            style={{marginVertical: 10, alignSelf: 'center'}}
           />
-        )}
-      </View>
-      <Subheading subheading="Add Tags" />
-      <FlatList
-        data={Object.values(venueTags)}
-        keyExtractor={item => item}
-        numColumns={3}
-        renderItem={({item, index}) => (
+          <Subheading subheading="Keywords" />
+          <NormalText
+            fontStyle={{fontSize: 10}}
+            style={styles.normalText}
+            text="Add relevant keywords to improve your search ranking"
+          />
+          <FlatList
+            data={keywords}
+            keyExtractor={item => item}
+            renderItem={({item, index}) => (
+              <KeywordListItem
+                fontStyle={{marginLeft: 10}}
+                keyword={item}
+                onPress={() => removeKeywordHandler(index)}
+                style={{alignSelf: 'center'}}
+              />
+            )}
+            scrollEnabled={false}
+            ItemSeparatorComponent={() => <View style={{height: 5}} />}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
+          <View style={styles.addKeyword}>
+            <Input
+              placeholder={'Placeholder'}
+              setState={setKeywordInput}
+              state={keywordInput}
+              style={{width: '75%'}}
+            />
+            <Pressable onPress={addKeywordHandler} style={styles.addButton}>
+              <Icon name="plus" size={16} color={colors.text} />
+            </Pressable>
+          </View>
           <AppButton
-            fontStyle={{
-              fontSize: 10,
-              fontFamily: filtersArray[index] ? fonts[600] : fonts[300],
-            }}
-            onPress={() => tagClickHandler(index)}
-            solid={filtersArray[index]}
-            style={{margin: 8, height: 28, width: 94}}
-            title={item.title}
+            active={!loading}
+            fontStyle={styles.buttonText}
+            onPress={handleSubmit}
+            solid
+            style={styles.button}
+            title="Submit"
           />
-        )}
-        scrollEnabled={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        style={{marginVertical: 10, alignSelf: 'center'}}
-      />
-      <Subheading subheading="Keywords" />
-      <NormalText
-        fontStyle={{fontSize: 10}}
-        style={styles.normalText}
-        text="Add relevant keywords to improve your search ranking"
-      />
-      <FlatList
-        data={keywords}
-        keyExtractor={item => item}
-        renderItem={({item, index}) => (
-          <KeywordListItem
-            fontStyle={{marginLeft: 10}}
-            keyword={item}
-            onPress={() => removeKeywordHandler(index)}
-            style={{alignSelf: 'center'}}
-          />
-        )}
-        scrollEnabled={false}
-        ItemSeparatorComponent={() => <View style={{height: 5}} />}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      />
-      <View style={styles.addKeyword}>
-        <Input
-          placeholder={'Placeholder'}
-          setState={setKeywordInput}
-          state={keywordInput}
-          style={{width: '75%'}}
-        />
-        <Pressable onPress={addKeywordHandler} style={styles.addButton}>
-          <Icon name="plus" size={16} color={colors.text} />
-        </Pressable>
-      </View>
-      <AppButton
-        fontStyle={styles.buttonText}
-        onPress={handleSubmit}
-        solid
-        style={styles.button}
-        title="Submit"
-      />
-    </ScrollView>
+        </ScrollView>
+      )}
+    </>
   );
 };
 
@@ -397,6 +421,10 @@ const styles = StyleSheet.create({
   imagesList: {
     width: '80%',
     alignSelf: 'center',
+  },
+  loader: {
+    flex: 1,
+    margin: 'auto',
   },
   logoContainer: {
     alignSelf: 'center',

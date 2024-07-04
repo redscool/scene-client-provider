@@ -9,6 +9,7 @@ import routes from '../navigation/routes';
 import TextButton from '../components/TextButton';
 import Timer from '../components/Timer';
 import useService from '../../context/service';
+import {showToast} from '../components/widgets/toast';
 
 const OtpResetPassword = ({navigation, route}) => {
   const {navigate} = navigation;
@@ -16,7 +17,10 @@ const OtpResetPassword = ({navigation, route}) => {
 
   const {request} = useService();
 
+  const [loading, setLoading] = useState();
+
   const handleContinue = async () => {
+    setLoading(true);
     const email = route.params.email;
     const data = await request('post', '/api/auth/organiser/verifyOtp', {
       otp,
@@ -25,11 +29,25 @@ const OtpResetPassword = ({navigation, route}) => {
     if (data?.error) {
       // TODO: error handling
       console.log(data);
+      showToast('Something went wrong.');
     } else {
       const {resetToken} = data;
       navigate(routes.RESET_PASSWORD, {resetToken});
     }
+    setLoading(false);
   };
+
+  const handleResendOtp = async () => {
+    const email = route.params.email;
+    try {
+      await request('post', '/api/auth/organiser/forgotPassword', {email});
+      showToast('Otp sent successfully.');
+    } catch (e) {
+      // TODO: error handling
+      showToast('Something went wrong.');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -43,8 +61,10 @@ const OtpResetPassword = ({navigation, route}) => {
         fontStyle={styles.resendText}
         style={styles.resend}
         title="Resend OTP"
+        onPress={handleResendOtp}
       />
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonFont}
         onPress={handleContinue}
         solid

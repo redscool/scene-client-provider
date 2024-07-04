@@ -24,8 +24,6 @@ const ScanTicket = ({navigation, route}) => {
       const userId = qrcode.substr(0, 24);
       const ticketId = qrcode.substr(24, 24);
 
-      console.log(userId);
-      console.log(ticketId);
       const res = await requestWithAccessToken(
         'post',
         '/api/app/event/scanTicket/',
@@ -35,7 +33,6 @@ const ScanTicket = ({navigation, route}) => {
           userId,
         },
       );
-      console.log(res);
     } catch (e) {
       // TODO: error handling
       showToast('Invalid Ticket');

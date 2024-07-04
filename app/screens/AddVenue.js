@@ -27,10 +27,11 @@ import UploadImage from '../components/UploadImage';
 import UploadImageCard from '../components/UploadImageCard';
 
 import useService from '../../context/service';
+import useAppConfig from '../../context/appConfig';
 
 const AddVenue = ({navigation}) => {
   const {requestWithAccessToken} = useService();
-  const {cities, types, venueTags} = useConfig();
+  const {cities, types, venueTags} = useAppConfig();
 
   const [bannerImage, setBannerImage] = useState();
   const [name, setName] = useState('');
@@ -85,6 +86,8 @@ const AddVenue = ({navigation}) => {
   const [showMap, setShowMap] = useState(false);
   const [galleryTilesArray, setGalleryTilesArray] = useState();
 
+  const [loading, setLoading] = useState();
+
   const uploadTypes = {
     BannerImage: {
       setImage: setBannerImage,
@@ -103,6 +106,7 @@ const AddVenue = ({navigation}) => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (
       !city ||
       !bannerImage ||
@@ -116,6 +120,7 @@ const AddVenue = ({navigation}) => {
       !logo
     ) {
       showToast('Please Enter All the Details.');
+      setLoading(false);
       return;
     }
     const tags = [];
@@ -145,6 +150,7 @@ const AddVenue = ({navigation}) => {
     } catch (e) {
       showToast('Something went wrong.');
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -290,6 +296,7 @@ const AddVenue = ({navigation}) => {
         numColumns={3}
         renderItem={({item, index}) => (
           <AppButton
+            active
             fontStyle={{
               fontSize: 10,
               fontFamily: filtersArray[index] ? fonts[600] : fonts[300],
@@ -339,6 +346,7 @@ const AddVenue = ({navigation}) => {
         </Pressable>
       </View>
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonText}
         onPress={handleSubmit}
         solid
