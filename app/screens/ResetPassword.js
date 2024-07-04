@@ -15,15 +15,19 @@ const ResetPassword = ({navigation, route}) => {
 
   const {request} = useService();
 
+  const [loading, setLoading] = useState();
+
   const handleReset = async () => {
     if (cpassword !== password) {
       showToast('Password and Confirm password are different');
       return;
     }
+    setLoading(true);
     const data = await request('post', '/api/auth/organiser/resetPassword', {
       password,
       resetToken,
     });
+    setLoading(false);
     if (data?.error) {
       showToast('Something went wrong.');
     } else {
@@ -52,6 +56,7 @@ const ResetPassword = ({navigation, route}) => {
         style={styles.input}
       />
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonText}
         onPress={handleReset}
         solid

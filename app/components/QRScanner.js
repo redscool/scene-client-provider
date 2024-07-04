@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Linking, StyleSheet, Text, View} from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -23,7 +23,6 @@ function QRScanner({setQrValue, style}) {
     onCodeScanned: codes => {
       let value = codes[0]?.value;
       let type = codes[0]?.type;
-      console.log(codes[0]);
       setQrValue(value);
     },
   });
@@ -49,7 +48,6 @@ function QRScanner({setQrValue, style}) {
         style={StyleSheet.absoluteFill}
         device={device}
         isActive={true}
-        onTouchEnd={() => setEnableOnCodeScanned(true)}
       />
     </View>
   );

@@ -25,19 +25,22 @@ import NormalText from '../components/NormalText';
 import Subheading from '../components/Subheading';
 import fonts from '../config/fonts';
 import useService from '../../context/service';
+import ButtonLoader from '../components/ButtonLoader';
 
-const Event = ({route, navigation}) => {
-  const {navigate} = navigation;
+const Event = ({route}) => {
   const {request} = useService();
 
   const [event, setEvent] = useState({});
 
   const formattedDate = getEventFormattedDate(event?.startTime);
-  const [state, setState] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const init = async eventId => {
+    setLoading(true);
     const res = await request('get', '/api/app/event', {eventId});
     setEvent(res);
+    setLoading(false);
   };
 
   const handleViewMap = () => {
@@ -62,84 +65,90 @@ const Event = ({route, navigation}) => {
   }, []);
 
   return (
-    <ScrollView
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-      bounces={false}>
-      <EventBanner
-        imageUrl={getFileUrl(event?.bannerImage)}
-        style={styles.eventBanner}
-      />
-      <Heading heading={event?.name} />
+    <>
+      {loading ? (
+        <ButtonLoader style={styles.loader} />
+      ) : (
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+          bounces={false}>
+          <EventBanner
+            imageUrl={getFileUrl(event?.bannerImage)}
+            style={styles.eventBanner}
+          />
+          <Heading heading={event?.name} />
 
-      <View style={styles.detailsContainer}>
-        <DetailItem
-          iconName="calendar"
-          value={formattedDate}
-          style={{marginBottom: 6}}
-        />
-        <DetailItem
-          iconName="timer"
-          value={`${convertTimeToHHMMFormat(
-            new Date(event?.startTime),
-          )} - ${convertTimeToHHMMFormat(new Date(event?.endTime))}`}
-          style={{marginBottom: 6}}
-        />
-        <DetailItem
-          iconName="location"
-          value={`${event.venueId?.abbreviation}, ${getAddress(
-            event.venueId?.address,
-          )}`}
-          style={{marginBottom: 6}}
-        />
-        <TextButton
-          fontStyle={{
-            fontSize: 12,
-            fontFamily: fonts[600],
-            textDecorationLine: 'underline',
-          }}
-          onPress={handleViewMap}
-          style={{marginBottom: 10, marginLeft: 20}}
-          title="View in Maps"
-        />
-        <DetailItem
-          iconName="rupee"
-          value={event.price === 0 ? 'FREE' : event.price}
-          style={{marginBottom: 6}}
-        />
-      </View>
-      <Subheading subheading="Gallery" />
-      <Carousel slides={event?.gallery} style={styles.carousel} />
-      <Subheading subheading="About" />
-      <NormalText
-        fontStyle={{paddingLeft: 10}}
-        style={{alignSelf: 'center', width: '90%'}}
-        text={event.about}
-      />
-      <Subheading subheading="Note" />
-      <NormalText
-        fontStyle={{paddingLeft: 10}}
-        style={{alignSelf: 'center', width: '90%'}}
-        text={event.note}
-      />
-      <Subheading subheading={`More at ${event.venueId?.abbreviation}`} />
-      <TextButton
-        fontStyle={{
-          fontSize: 12,
-          fontFamily: fonts[600],
-          marginLeft: 10,
-          textDecorationLine: 'underline',
-        }}
-        onPress={handleViewMap}
-        title="Show Venue"
-        style={{
-          marginBottom: 70,
-          marginLeft: 20,
-          marginTop: 10,
-          width: '90%',
-        }}
-      />
-    </ScrollView>
+          <View style={styles.detailsContainer}>
+            <DetailItem
+              iconName="calendar"
+              value={formattedDate}
+              style={{marginBottom: 6}}
+            />
+            <DetailItem
+              iconName="timer"
+              value={`${convertTimeToHHMMFormat(
+                new Date(event?.startTime),
+              )} - ${convertTimeToHHMMFormat(new Date(event?.endTime))}`}
+              style={{marginBottom: 6}}
+            />
+            <DetailItem
+              iconName="location"
+              value={`${event.venueId?.abbreviation}, ${getAddress(
+                event.venueId?.address,
+              )}`}
+              style={{marginBottom: 6}}
+            />
+            <TextButton
+              fontStyle={{
+                fontSize: 12,
+                fontFamily: fonts[600],
+                textDecorationLine: 'underline',
+              }}
+              onPress={handleViewMap}
+              style={{marginBottom: 10, marginLeft: 20}}
+              title="View in Maps"
+            />
+            <DetailItem
+              iconName="rupee"
+              value={event.price === 0 ? 'FREE' : event.price}
+              style={{marginBottom: 6}}
+            />
+          </View>
+          <Subheading subheading="Gallery" />
+          <Carousel slides={event?.gallery} style={styles.carousel} />
+          <Subheading subheading="About" />
+          <NormalText
+            fontStyle={{paddingLeft: 10}}
+            style={{alignSelf: 'center', width: '90%'}}
+            text={event.about}
+          />
+          <Subheading subheading="Note" />
+          <NormalText
+            fontStyle={{paddingLeft: 10}}
+            style={{alignSelf: 'center', width: '90%'}}
+            text={event.note}
+          />
+          <Subheading subheading={`More at ${event.venueId?.abbreviation}`} />
+          <TextButton
+            fontStyle={{
+              fontSize: 12,
+              fontFamily: fonts[600],
+              marginLeft: 10,
+              textDecorationLine: 'underline',
+            }}
+            onPress={handleViewMap}
+            title="Show Venue"
+            style={{
+              marginBottom: 70,
+              marginLeft: 20,
+              marginTop: 10,
+              width: '90%',
+            }}
+          />
+        </ScrollView>
+      )}
+    </>
   );
 };
 
@@ -176,6 +185,10 @@ const styles = StyleSheet.create({
     height: 35,
     marginLeft: 'auto',
     marginRight: 28,
+  },
+  loader: {
+    flex: 1,
+    margin: 'auto',
   },
   registerButton: {
     height: 35,

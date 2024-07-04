@@ -15,9 +15,7 @@ const StaffLogin = ({navigation}) => {
   const {request} = useService();
   const {navigate} = navigation;
   const [qrValue, setQrValue] = useState();
-  useEffect(() => {
-    console.log("=====" + qrValue)
-  }, [qrValue])
+ 
   const handleLogin = async () => {
     if (!qrValue) return;
     try {
