@@ -5,7 +5,6 @@ import {SECURE_STORAGE_KEY, STORAGE_KEY} from '../config/constants';
 import routes from '../navigation/routes';
 
 const SERVER = config.SERVER;
-const FILE_SERVER = config.FILE_SERVER;
 
 const getUpdatedUrl = (url, body = {}) => {
   let newUrl = url;

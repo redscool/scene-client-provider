@@ -6,18 +6,16 @@ import NormalText from '../components/NormalText';
 import QRScanner from '../components/QRScanner';
 import routes from '../navigation/routes';
 import TextButton from '../components/TextButton';
-import {useService} from '../../context';
 import {showToast} from '../components/widgets/toast';
 import {setSecureItem} from '../utils/storage';
 import {SECURE_STORAGE_KEY} from '../config/constants';
+import useService from '../../context/service';
 
 const StaffLogin = ({navigation}) => {
   const {request} = useService();
   const {navigate} = navigation;
   const [qrValue, setQrValue] = useState();
-  useEffect(() => {
-    console.log("=====" + qrValue)
-  }, [qrValue])
+ 
   const handleLogin = async () => {
     if (!qrValue) return;
     try {

@@ -7,7 +7,7 @@ import QRScanner from '../components/QRScanner';
 import TextButton from '../components/TextButton';
 import routes from '../navigation/routes';
 import {showToast} from '../components/widgets/toast';
-import {useService} from '../../context';
+import useService from '../../context/service';
 
 const ScanTicket = ({navigation, route}) => {
   const {requestWithAccessToken} = useService();
@@ -24,14 +24,15 @@ const ScanTicket = ({navigation, route}) => {
       const userId = qrcode.substr(0, 24);
       const ticketId = qrcode.substr(24, 24);
 
-      console.log(userId);
-      console.log(ticketId);
-      const res = await requestWithAccessToken('post', '/api/app/event/scanTicket/', {
-        eventId,
-        ticketId,
-        userId,
-      });
-      console.log(res);
+      const res = await requestWithAccessToken(
+        'post',
+        '/api/app/event/scanTicket/',
+        {
+          eventId,
+          ticketId,
+          userId,
+        },
+      );
     } catch (e) {
       // TODO: error handling
       showToast('Invalid Ticket');

@@ -5,33 +5,34 @@ import AppButton from '../components/AppButton';
 import colors from '../config/colors';
 import EventCard from '../components/EventCard';
 import fonts from '../config/fonts';
-import {getSecureItem} from '../utils/storage';
 import SectionHeading from '../components/SectionHeading';
-import {STORAGE_KEY} from '../config/constants';
 import routes from '../navigation/routes';
-import useService from '../../context/ServiceContext';
+import useEvents from '../../context/event';
+import ButtonLoader from '../components/ButtonLoader';
 
 const HomeOrganiser = ({navigation}) => {
   const {navigate} = navigation;
-  const [events, setEvents] = useState([]);
+  const {events} = useEvents();
+  const {getEvents} = useEvents();
 
-  const {requestWithAccessToken} = useService();
+  const [eventLoading, setEventLoading] = useState();
 
   const init = async () => {
-    const creatorId = await getSecureItem(STORAGE_KEY.USER_ID);
-    const res = await requestWithAccessToken('get', '/api/app/event/events', {
-      creatorId,
-    });
-    setEvents(res);
+    setEventLoading(true);
+    await getEvents();
+    setEventLoading(false);
   };
+
   useEffect(() => {
     init();
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Welcome</Text>
       <SectionHeading style={{marginTop: 20}} title={`Good Morning`} />
       <AppButton
+        active
         fontStyle={styles.buttonText}
         onPress={() => navigate(routes.ADD_EVENT)}
         solid
@@ -39,18 +40,22 @@ const HomeOrganiser = ({navigation}) => {
         title="Add Event"
       />
       <SectionHeading style={{marginTop: 36}} title="Your Events" />
-      <FlatList
-        data={events}
-        nestedScrollEnabled
-        renderItem={({item}) => (
-          <EventCard
-            event={item}
-            onPress={() => navigate(routes.EVENT_OPTIONS, item)}
-            style={{alignSelf: 'center', marginTop: 30}}
-          />
-        )}
-        style={{marginBottom: 10, marginTop: 10}}
-      />
+      {eventLoading ? (
+        <ButtonLoader style={styles.loader} />
+      ) : (
+        <FlatList
+          data={events}
+          nestedScrollEnabled
+          renderItem={({item}) => (
+            <EventCard
+              event={item}
+              onPress={() => navigate(routes.EVENT_OPTIONS, item)}
+              style={{alignSelf: 'center', marginTop: 30}}
+            />
+          )}
+          style={{marginBottom: 10, marginTop: 10}}
+        />
+      )}
     </View>
   );
 };
@@ -77,5 +82,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 50,
     width: '90%',
+  },
+  loader: {
+    alignSelf: 'center',
+    height: 180,
+    width: 180,
   },
 });

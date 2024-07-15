@@ -5,11 +5,23 @@ import fonts from '../config/fonts';
 import {getSecureItem} from '../utils/storage';
 import routes from '../navigation/routes';
 import {SECURE_STORAGE_KEY} from '../config/constants';
+import useAppConfig from '../../context/appConfig';
+import useAuth from '../../context/auth';
 
 const LandingPage = ({navigation}) => {
+  const {getCities, getEventTags, getTypes, getVenueTags} = useAppConfig();
+  const {setAuth} = useAuth();
+
   const initApp = async () => {
+    await getCities();
+    await getEventTags();
+    await getTypes();
+    await getVenueTags();
+
     const accessToken = await getSecureItem(SECURE_STORAGE_KEY.ACCESS_TOKEN);
+
     if (accessToken) {
+      await setAuth();
       navigation.reset({
         index: 0,
         routes: [{name: routes.HOME_ORGANISER}],
@@ -21,9 +33,11 @@ const LandingPage = ({navigation}) => {
       });
     }
   };
+
   useEffect(() => {
     initApp();
   }, []);
+
   return (
     <View style={styles.container}>
       <Logo />
