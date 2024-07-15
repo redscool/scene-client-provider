@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton.js';
 import Input from '../components/Input.js';
 import LockImage from '../components/LockImage.js';
 import routes from '../navigation/routes.js';
-import useService from '../../context/ServiceContext.js';
+import useService from '../../context/service.js';
 import {showToast} from '../components/widgets/toast.js';
 
 const ForgotPassword = ({navigation}) => {
@@ -14,8 +14,10 @@ const ForgotPassword = ({navigation}) => {
 
   const {request} = useService();
 
+  const [loading, setLoading] = useState();
+
   const handleForgotPassword = async () => {
-    console.log("click");
+    setLoading(true);
     const data = await request('post', '/api/auth/organiser/forgotPassword', {
       email,
     });
@@ -25,6 +27,7 @@ const ForgotPassword = ({navigation}) => {
     } else {
       navigate(routes.CONFIRM_EMAIL, {email});
     }
+    setLoading(false);
   };
   return (
     <View style={styles.container}>
@@ -37,6 +40,7 @@ const ForgotPassword = ({navigation}) => {
         style={styles.input}
       />
       <AppButton
+        active={!loading}
         fontStyle={styles.buttonText}
         onPress={handleForgotPassword}
         solid

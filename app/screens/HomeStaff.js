@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import colors from '../config/colors';
 import fonts from '../config/fonts';
@@ -10,9 +10,12 @@ import {SECURE_STORAGE_KEY} from '../config/constants';
 
 const HomeStaff = ({navigation}) => {
   const {navigate} = navigation;
-  
+
+  const [eventId, setEventId] = useState();
+
   const init = async () => {
     const eventId = await getSecureItem(SECURE_STORAGE_KEY.EVENT_ID);
+    setEventId(eventId);
     if (!eventId) {
       navigation.reset({
         index: 0,
@@ -25,18 +28,20 @@ const HomeStaff = ({navigation}) => {
     await removeSecureItem(SECURE_STORAGE_KEY.EVENT_ID);
     navigation.reset({
       index: 0,
-      routes: [{name: routes.LOGIN_STAFF}],
+      routes: [{name: routes.LOGIN}],
     });
   };
+
   useEffect(() => {
     init();
   }, []);
+  
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Welcome</Text>
       <ListItem
         icon="ticket"
-        onPress={() => navigate(routes.SCAN_TICKET)}
+        onPress={() => navigate(routes.SCAN_TICKET, {_id: eventId})}
         style={{alignSelf: 'center', marginTop: 40}}
         value="Scan Ticker"
       />
