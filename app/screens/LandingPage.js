@@ -1,16 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
 import Logo from '../components/Logo';
 import fonts from '../config/fonts';
-import {getSecureItem} from '../utils/storage';
+import { getSecureItem } from '../utils/storage';
 import routes from '../navigation/routes';
-import {SECURE_STORAGE_KEY} from '../config/constants';
+import { SECURE_STORAGE_KEY } from '../config/constants';
 import useAppConfig from '../../context/appConfig';
 import useAuth from '../../context/auth';
+import { requestTrackingPermission } from 'react-native-tracking-transparency';
 
-const LandingPage = ({navigation}) => {
-  const {getCities, getEventTags, getTypes, getVenueTags} = useAppConfig();
-  const {setAuth} = useAuth();
+const LandingPage = ({ navigation }) => {
+  const { getCities, getEventTags, getTypes, getVenueTags } = useAppConfig();
+  const { setAuth } = useAuth();
 
   const initApp = async () => {
     await getCities();
@@ -18,18 +19,21 @@ const LandingPage = ({navigation}) => {
     await getTypes();
     await getVenueTags();
 
+    const trackingStatus = await requestTrackingPermission();
+    if (trackingStatus === 'authorized' || trackingStatus === 'unavailable') {}
+
     const accessToken = await getSecureItem(SECURE_STORAGE_KEY.ACCESS_TOKEN);
 
     if (accessToken) {
       await setAuth();
       navigation.reset({
         index: 0,
-        routes: [{name: routes.HOME_ORGANISER}],
+        routes: [{ name: routes.HOME_ORGANISER }],
       });
     } else {
       navigation.reset({
         index: 0,
-        routes: [{name: routes.LOGIN}],
+        routes: [{ name: routes.LOGIN }],
       });
     }
   };
