@@ -33,6 +33,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your camera to upload photos for events and venue.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your location to show you relevant events and venues.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your photos to upload from your library.</string>
 	<key>NSUserTrackingUsageDescription</key>
