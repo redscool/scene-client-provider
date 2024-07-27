@@ -10,7 +10,7 @@ const UploadedImageCard = ({image, onPress, style}) => {
     <View onPress={onPress} style={[styles.container, style]}>
       {onPress && (
         <Pressable onPress={onPress} style={styles.button}>
-          <Icon color={colors.white} name="cross" size={8} />
+          <Icon color={colors.text} name="cross" size={8} />
         </Pressable>
       )}
       <Image
