@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    color: colors.white,
+    color: colors.text,
     fontFamily: fonts[400],
     fontSize: 12,
   },

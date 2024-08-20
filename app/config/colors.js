@@ -10,5 +10,4 @@ export default colors = {
   primary: '#E1FF41',
   secondary: '#DCDCDC',
   text: '#F0F0F0',
-  white: '#fff',
 };
